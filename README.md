@@ -23,7 +23,6 @@
 html, body{
   margin:0;
   padding:0;
-  height:auto;
   overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
@@ -38,7 +37,7 @@ body{
     linear-gradient(180deg,var(--bg2),var(--bg1));
 }
 
-/* floating hearts background */
+/* floating hearts */
 .hearts{
   position:fixed;
   inset:0;
@@ -58,7 +57,7 @@ body{
   100%{transform:translateY(-120vh);opacity:0}
 }
 
-/* Normal website layout (scroll-friendly) */
+/* layout */
 .page{
   position:relative;
   z-index:1;
@@ -73,7 +72,6 @@ body{
   border:1px solid var(--stroke);
   backdrop-filter:blur(10px);
   overflow:hidden;
-  margin-top:12px;
 }
 
 /* top bar */
@@ -90,7 +88,6 @@ body{
   padding:6px 10px;
   border-radius:999px;
   border:1px solid var(--stroke);
-  white-space:nowrap;
 }
 .progress{
   flex:1;
@@ -103,7 +100,6 @@ body{
   height:100%;
   width:40%;
   background:linear-gradient(90deg,#ff4d87,#ffb703);
-  transition: width 500ms ease;
 }
 
 /* content */
@@ -116,21 +112,18 @@ body{
 h1{
   margin:0;
   font-size:clamp(26px,4vw,42px);
-  line-height:1.06;
 }
 .sub{
   margin:0;
   color:var(--muted);
   font-size:16px;
-  line-height:1.4;
 }
 
-/* image */
+/* images */
 .frame{
   border-radius:22px;
   overflow:hidden;
   border:1px solid var(--stroke);
-  background:rgba(0,0,0,0.18);
 }
 .photo{
   width:100%;
@@ -139,15 +132,14 @@ h1{
   object-fit:cover;
 }
 
-/* actions */
+/* buttons */
 .actions{
   position:relative;
   height:110px;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-top:4px;
-  touch-action: pan-y; /* allow vertical scrolling */
+  touch-action:pan-y;
 }
 
 button{
@@ -156,33 +148,29 @@ button{
   padding:14px 22px;
   font-size:18px;
   font-weight:800;
-  cursor:pointer;
 }
 
 .yes{
   background:linear-gradient(135deg,#ff4d87,#ffb703);
   color:#1b1020;
 }
-
 .no{
   position:absolute;
   right:10px;
   top:10px;
-  background:rgba(255,255,255,.20);
+  background:rgba(255,255,255,.2);
   color:white;
 }
 
 .footer{
-  margin:0;
   font-size:14px;
-  color:rgba(255,255,255,0.65);
+  color:rgba(255,255,255,.65);
 }
 
-.hidden{ display:none; }
+.hidden{display:none;}
 
-/* Confetti (emoji fall) */
 @keyframes fall{
-  to{ transform:translateY(120vh) rotate(360deg); opacity:0; }
+  to{transform:translateY(120vh) rotate(360deg); opacity:0;}
 }
 </style>
 </head>
@@ -191,67 +179,66 @@ button{
 <div class="hearts" id="hearts"></div>
 
 <div class="page">
-  <div class="card">
+<div class="card">
 
-    <!-- ASK SCREEN -->
-    <section id="ask">
-      <div class="topbar">
-        <div class="pill">💌 For Piyush</div>
-        <div class="progress"><div id="prog"></div></div>
-        <div class="pill">💘 Valentine</div>
-      </div>
-
-      <div class="content">
-        <h1>Piyush, will you be my Valentine? 💘</h1>
-        <p class="sub">Choose wisely 😌</p>
-
-        <div class="frame">
-          <img src="ask.HEIC" class="photo" alt="Us together">
-        </div>
-
-        <div class="actions" id="arena">
-          <button class="yes" id="yesBtn">Yes 💖</button>
-          <button class="no" id="noBtn">No 🙅‍♂️</button>
-        </div>
-
-        <p class="footer" id="hint">Hint: you know what to do 💖</p>
-      </div>
-    </section>
-
-    <!-- YES SCREEN -->
-    <section id="yes" class="hidden">
-      <div class="topbar">
-        <div class="pill">✅ Accepted</div>
-        <div class="progress"><div style="width:100%"></div></div>
-        <div class="pill">🥰 Locked in</div>
-      </div>
-
-      <div class="content">
-        <h1>YAYYYYY 🥰</h1>
-        <p class="sub">Congratulations Piyush 💕<br>You are officially my Valentine.</p>
-
-        <div class="frame">
-          <img src="yes.jpg" class="photo" alt="Piyush">
-        </div>
-
-        <p class="sub">Love, Reshma 💖</p>
-        <p class="footer">Now come here, Valentine 😌💞</p>
-      </div>
-    </section>
-
+<!-- ASK -->
+<section id="ask">
+  <div class="topbar">
+    <div class="pill">💌 For Piyush</div>
+    <div class="progress"><div id="prog"></div></div>
+    <div class="pill">💘 Valentine</div>
   </div>
+
+  <div class="content">
+    <h1>Piyush, will you be my Valentine? 💘</h1>
+    <p class="sub">Choose wisely 😌</p>
+
+    <div class="frame">
+      <img src="ask.HEIC" class="photo" alt="Asking photo">
+    </div>
+
+    <div class="actions" id="arena">
+      <button class="yes" id="yesBtn">Yes 💖</button>
+      <button class="no" id="noBtn">No 🙅‍♂️</button>
+    </div>
+
+    <p class="footer" id="hint">Hint: you know what to do 💖</p>
+  </div>
+</section>
+
+<!-- YES -->
+<section id="yes" class="hidden">
+  <div class="topbar">
+    <div class="pill">✅ Accepted</div>
+    <div class="progress"><div style="width:100%"></div></div>
+    <div class="pill">🥰 Locked in</div>
+  </div>
+
+  <div class="content">
+    <h1>YAYYYYY 🥰</h1>
+    <p class="sub">Congratulations Piyush 💕<br>You are officially my Valentine.</p>
+
+    <div class="frame">
+      <img src="yes.jpg" class="photo" alt="Yes photo">
+    </div>
+
+    <p class="sub">Love, Reshma 💖</p>
+  </div>
+</section>
+
+</div>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const arena = document.getElementById("arena");
-const ask = document.getElementById("ask");
-const yes = document.getElementById("yes");
-const prog = document.getElementById("prog");
-const hint = document.getElementById("hint");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const arena=document.getElementById("arena");
+const ask=document.getElementById("ask");
+const yes=document.getElementById("yes");
+const prog=document.getElementById("prog");
+const hint=document.getElementById("hint");
 
-const phrases = [
+const phrases=[
   "No 🙅‍♂️",
   "Pitchu aile ma 🥺",
   "Piyush pls 😭",
@@ -261,54 +248,33 @@ const phrases = [
   "Just press Yes 💖"
 ];
 
-const hintMessages = [
+const hintMessages=[
   "Hint: wrong choice 😌",
   "Hint: try again 🙂",
   "Hint: just press Yes 💖"
 ];
 
-let count = 0;
+let count=0;
 
 function moveNo(){
-  const maxX = arena.offsetWidth - noBtn.offsetWidth - 10;
-  const maxY = arena.offsetHeight - noBtn.offsetHeight - 10;
-  const x = Math.max(10, Math.random() * Math.max(10, maxX));
-  const y = Math.max(10, Math.random() * Math.max(10, maxY));
-
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-  noBtn.style.right = "auto";
-
-  noBtn.textContent = phrases[Math.min(count, phrases.length - 1)];
-
-  if (count > 0 && count <= hintMessages.length) {
-    hint.textContent = hintMessages[count - 1];
+  const maxX=arena.offsetWidth-noBtn.offsetWidth-10;
+  const maxY=arena.offsetHeight-noBtn.offsetHeight-10;
+  noBtn.style.left=Math.max(10,Math.random()*maxX)+"px";
+  noBtn.style.top=Math.max(10,Math.random()*maxY)+"px";
+  noBtn.textContent=phrases[Math.min(count,phrases.length-1)];
+  if(count>0 && count<=hintMessages.length){
+    hint.textContent=hintMessages[count-1];
   }
-
   count++;
 }
 
-/* Desktop hover */
-["mouseenter","mouseover"].forEach(evt => {
-  noBtn.addEventListener(evt, () => moveNo(), {passive:true});
-});
-
-/* Mobile touch: prevent only on the NO button tap (does not block page scroll) */
-noBtn.addEventListener("touchstart", (e) => {
-  e.preventDefault();
-  moveNo();
-}, {passive:false});
-
-/* If he somehow clicks No, still show Yes */
-noBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  showYes();
-});
-
-yesBtn.addEventListener("click", showYes);
+noBtn.addEventListener("touchstart",(e)=>{e.preventDefault();moveNo();},{passive:false});
+noBtn.addEventListener("mouseenter",moveNo);
+noBtn.addEventListener("click",(e)=>{e.preventDefault();showYes();});
+yesBtn.addEventListener("click",showYes);
 
 function showYes(){
-  prog.style.width = "100%";
+  prog.style.width="100%";
   ask.classList.add("hidden");
   yes.classList.remove("hidden");
   confetti();
@@ -316,31 +282,29 @@ function showYes(){
 }
 
 function confetti(){
-  const emojis = ["💖","💘","💝","✨","🥰","💞"];
+  const emojis=["💖","💘","💝","✨","🥰"];
   for(let i=0;i<24;i++){
     const s=document.createElement("span");
-    s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    s.textContent=emojis[Math.floor(Math.random()*emojis.length)];
     s.style.position="fixed";
-    s.style.left = Math.random()*100 + "vw";
-    s.style.top = "-20px";
-    s.style.fontSize = (16 + Math.random()*24) + "px";
-    s.style.animation = "fall 1.6s ease forwards";
-    s.style.pointerEvents = "none";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top="-20px";
+    s.style.fontSize=16+Math.random()*24+"px";
+    s.style.animation="fall 1.6s ease forwards";
     document.body.appendChild(s);
     setTimeout(()=>s.remove(),1600);
   }
 }
 
-/* Floating hearts */
 setInterval(()=>{
   const h=document.createElement("div");
   h.className="heart";
   h.textContent=["💗","💖","💘","✨"][Math.floor(Math.random()*4)];
-  h.style.left=Math.random()*100 + "vw";
-  h.style.animationDuration=(6+Math.random()*6) + "s";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=6+Math.random()*6+"s";
   document.getElementById("hearts").appendChild(h);
   setTimeout(()=>h.remove(),12000);
-}, 420);
+},420);
 </script>
 
 </body>
