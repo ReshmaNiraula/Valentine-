@@ -24,7 +24,7 @@ html, body{
   margin:0;
   padding:0;
   height:auto;
-  overflow-y:auto;              /* allow scroll */
+  overflow-y:auto;
   -webkit-overflow-scrolling:touch;
 }
 
@@ -73,7 +73,7 @@ body{
   border:1px solid var(--stroke);
   backdrop-filter:blur(10px);
   overflow:hidden;
-  margin-top: 12px;
+  margin-top:12px;
 }
 
 /* top bar */
@@ -103,6 +103,7 @@ body{
   height:100%;
   width:40%;
   background:linear-gradient(90deg,#ff4d87,#ffb703);
+  transition: width 500ms ease;
 }
 
 /* content */
@@ -141,12 +142,12 @@ h1{
 /* actions */
 .actions{
   position:relative;
-  height:110px;                 /* more room for runaway button */
+  height:110px;
   display:flex;
   align-items:center;
   justify-content:center;
   margin-top:4px;
-  touch-action: pan-y;          /* allow vertical scrolling */
+  touch-action: pan-y; /* allow vertical scrolling */
 }
 
 button{
@@ -157,10 +158,12 @@ button{
   font-weight:800;
   cursor:pointer;
 }
+
 .yes{
   background:linear-gradient(135deg,#ff4d87,#ffb703);
   color:#1b1020;
 }
+
 .no{
   position:absolute;
   right:10px;
@@ -181,7 +184,6 @@ button{
 @keyframes fall{
   to{ transform:translateY(120vh) rotate(360deg); opacity:0; }
 }
-
 </style>
 </head>
 
@@ -212,7 +214,7 @@ button{
           <button class="no" id="noBtn">No 🙅‍♂️</button>
         </div>
 
-        <p class="footer">Hint: saying no has consequences</p>
+        <p class="footer" id="hint">Hint: you know what to do 💖</p>
       </div>
     </section>
 
@@ -247,6 +249,7 @@ const arena = document.getElementById("arena");
 const ask = document.getElementById("ask");
 const yes = document.getElementById("yes");
 const prog = document.getElementById("prog");
+const hint = document.getElementById("hint");
 
 const phrases = [
   "No 🙅‍♂️",
@@ -257,6 +260,13 @@ const phrases = [
   "Nice try 😏",
   "Just press Yes 💖"
 ];
+
+const hintMessages = [
+  "Hint: wrong choice 😌",
+  "Hint: try again 🙂",
+  "Hint: just press Yes 💖"
+];
+
 let count = 0;
 
 function moveNo(){
@@ -264,10 +274,18 @@ function moveNo(){
   const maxY = arena.offsetHeight - noBtn.offsetHeight - 10;
   const x = Math.max(10, Math.random() * Math.max(10, maxX));
   const y = Math.max(10, Math.random() * Math.max(10, maxY));
+
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
   noBtn.style.right = "auto";
-  noBtn.textContent = phrases[Math.min(count++, phrases.length - 1)];
+
+  noBtn.textContent = phrases[Math.min(count, phrases.length - 1)];
+
+  if (count > 0 && count <= hintMessages.length) {
+    hint.textContent = hintMessages[count - 1];
+  }
+
+  count++;
 }
 
 /* Desktop hover */
@@ -275,7 +293,7 @@ function moveNo(){
   noBtn.addEventListener(evt, () => moveNo(), {passive:true});
 });
 
-/* Mobile touch: only prevent default on the NO button itself (does not block page scroll) */
+/* Mobile touch: prevent only on the NO button tap (does not block page scroll) */
 noBtn.addEventListener("touchstart", (e) => {
   e.preventDefault();
   moveNo();
