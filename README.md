@@ -206,7 +206,7 @@ button{
         <p class="sub">Choose wisely 😌</p>
 
         <div class="frame">
-          <img src="ask.PNG" class="photo" alt="Us together">
+          <img src="ask.HEIC" class="photo" alt="Us together">
         </div>
 
         <div class="actions" id="arena">
