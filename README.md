@@ -14,27 +14,41 @@
 --text:#f7f7ff;
 --muted:rgba(255,255,255,0.7);
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{
+
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+html,body{
 margin:0;
+padding:0;
+}
+
+body{
 font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
 color:var(--text);
 background:
 radial-gradient(1200px 800px at 20% 15%, #ff4d87 0%, transparent 55%),
 radial-gradient(1200px 800px at 80% 85%, #ffb703 0%, transparent 55%),
 linear-gradient(180deg,var(--bg2),var(--bg1));
-overflow:hidden;
+overflow-y:auto;
+-webkit-overflow-scrolling:touch;
 }
 
 /* floating hearts */
-.hearts{position:fixed;inset:0;pointer-events:none}
+.hearts{
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+}
 .heart{
 position:absolute;
 bottom:-40px;
-animation:floatUp linear infinite;
 opacity:.75;
 font-size:18px;
+animation:floatUp linear infinite;
 }
 @keyframes floatUp{
 0%{transform:translateY(0);opacity:0}
@@ -42,15 +56,16 @@ font-size:18px;
 100%{transform:translateY(-120vh);opacity:0}
 }
 
+/* layout */
 .wrap{
-min-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:18px;
+position:relative;
+z-index:1;
+max-width:900px;
+margin:0 auto;
+padding:24px 16px 48px;
 }
+
 .card{
-width:min(820px,100%);
 background:var(--card);
 border-radius:26px;
 border:1px solid var(--stroke);
@@ -86,10 +101,11 @@ width:40%;
 background:linear-gradient(90deg,#ff4d87,#ffb703);
 }
 
+/* content */
 .content{
-padding:16px;
+padding:18px;
 display:grid;
-gap:12px;
+gap:14px;
 text-align:center;
 }
 h1{
@@ -99,6 +115,7 @@ font-size:clamp(26px,4vw,42px);
 .sub{
 color:var(--muted);
 font-size:16px;
+line-height:1.4;
 }
 
 .frame{
@@ -108,14 +125,17 @@ border:1px solid var(--stroke);
 }
 .photo{
 width:100%;
-height:55vh;
+height:auto;
 max-height:520px;
 object-fit:cover;
+display:block;
 }
 
+/* buttons */
 .actions{
 position:relative;
-height:95px;
+height:100px;
+margin-top:8px;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -129,10 +149,12 @@ font-size:18px;
 font-weight:800;
 cursor:pointer;
 }
+
 .yes{
 background:linear-gradient(135deg,#ff4d87,#ffb703);
 color:#1b1020;
 }
+
 .no{
 position:absolute;
 right:10px;
@@ -141,10 +163,14 @@ background:rgba(255,255,255,.2);
 color:white;
 }
 
-.hidden{display:none}
 .footer{
 font-size:14px;
 color:var(--muted);
+margin-top:6px;
+}
+
+.hidden{
+display:none;
 }
 </style>
 </head>
@@ -177,7 +203,7 @@ color:var(--muted);
 <button class="no" id="noBtn">No 🙅‍♂️</button>
 </div>
 
-<p class="footer">Hint: No is scared</p>
+<p class="footer">Hint: saying no has consequences</p>
 </div>
 </section>
 
@@ -216,6 +242,7 @@ const yes=document.getElementById("yes");
 
 const phrases=[
 "No 🙅‍♂️",
+"Pitchu aile ma 🥺",
 "Piyush pls 😭",
 "Wrong answer 😌",
 "Try again 🙂",
@@ -246,11 +273,12 @@ function showYes(){
 ask.classList.add("hidden");
 yes.classList.remove("hidden");
 confetti();
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function confetti(){
 const emojis=["💖","💘","💝","✨","🥰"];
-for(let i=0;i<26;i++){
+for(let i=0;i<24;i++){
 const s=document.createElement("span");
 s.textContent=emojis[Math.floor(Math.random()*emojis.length)];
 s.style.position="fixed";
@@ -263,6 +291,7 @@ setTimeout(()=>s.remove(),1600);
 }
 }
 
+/* floating hearts */
 setInterval(()=>{
 const h=document.createElement("div");
 h.className="heart";
